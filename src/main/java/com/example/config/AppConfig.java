@@ -1,20 +1,28 @@
 package com.example.config;
 
-import com.example.beans.GreetingService;
-import com.example.beans.UserService;
+import com.example.beans.Cup;
+import com.example.beans.Water;
+import com.example.beans.Teabag;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@ComponentScan("com.example.beans")
 public class AppConfig {
 
     @Bean
-    public GreetingService greetingService() {
-        return new GreetingService();
+    public Water water() {
+        return new Water();
     }
 
     @Bean
-    public UserService userService(GreetingService greetingService) {
-        return new UserService(greetingService);
+    public Teabag teaBag() {
+        return new Teabag();
+    }
+
+    @Bean
+    public Cup cup(Water water, Teabag teaBag) {
+        return new Cup(water, teaBag);
     }
 }
